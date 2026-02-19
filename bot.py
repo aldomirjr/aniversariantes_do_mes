@@ -25,7 +25,7 @@ aniversariantes = df[
 
 if not aniversariantes.empty:
     nomes = "\n".join(
-        [f"• {nome}" for nome in aniversariantes["Nome completo"]]
+        [f"• {nome}" for nome in aniversariantes["Nome completo "]]
     )
 
     mensagem = f"""
