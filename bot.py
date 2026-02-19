@@ -3,32 +3,51 @@ import datetime
 import os
 import pandas as pd
 
-TOKEN = os.getenv("8315623446:AAG7PqkDBZkM6FSqHbUxTtt0N-_MAbp1YSY")
+# =========================
+# CONFIGURAÇÕES
+# =========================
+
+TOKEN = os.getenv("TOK8315623446:AAG7PqkDBZkM6FSqHbUxTtt0N-_MAbp1YSYEN")
 CHAT_ID = os.getenv("-1003781537166")
 
 URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRBuYPsC6XDnfjGLkWF5saaL7wbEFTdRNamIT6vg3i13F3ngEfbP0JnuvHHefvpMMGuOm99yrpG69te/pub?output=csv"
 
-df = pd.read_csv(URL)
+# =========================
+# EXECUÇÃO
+# =========================
 
-# Garantir que Mes e dia sejam número
-df["Mes"] = df["Mes"].astype(int)
-df["dia"] = df["dia"].astype(int)
+try:
+    print("Baixando planilha...")
+    df = pd.read_csv(URL)
 
-hoje = datetime.datetime.now()
-mes_atual = hoje.month
-dia_atual = hoje.day
+    # Padronizar nomes das colunas
+    df.columns = df.columns.str.strip().str.lower()
 
-aniversariantes = df[
-    (df["Mes"] == mes_atual) &
-    (df["dia"] == dia_atual)
-]
+    print("Colunas encontradas:", df.columns.tolist())
 
-if not aniversariantes.empty:
-    nomes = "\n".join(
-        [f"• {nome}" for nome in aniversariantes["Nome completo "]]
-    )
+    # Garantir que mes e dia sejam números inteiros
+    df["mes"] = df["mes"].astype(float).astype(int)
+    df["dia"] = df["dia"].astype(float).astype(int)
 
-    mensagem = f"""
+    hoje = datetime.datetime.now()
+    mes_atual = hoje.month
+    dia_atual = hoje.day
+
+    print("Hoje:", mes_atual, dia_atual)
+
+    aniversariantes = df[
+        (df["mes"] == mes_atual) &
+        (df["dia"] == dia_atual)
+    ]
+
+    print("Aniversariantes encontrados:", len(aniversariantes))
+
+    if not aniversariantes.empty:
+        nomes = "\n".join(
+            [f"• {nome}" for nome in aniversariantes["nome completo"]]
+        )
+
+        mensagem = f"""
 🎉 Aniversariantes de Hoje 🎉
 
 {nomes}
@@ -36,9 +55,17 @@ if not aniversariantes.empty:
 Que Deus abençoe grandemente esse novo ano! 🙏
 """
 
-    url = f"https://api.telegram.org/bot{TOKEN}/sendMessage"
+        url = f"https://api.telegram.org/bot{TOKEN}/sendMessage"
 
-    requests.post(url, data={
-        "chat_id": CHAT_ID,
-        "text": mensagem
-    })
+        response = requests.post(url, data={
+            "chat_id": CHAT_ID,
+            "text": mensagem
+        })
+
+        print("Mensagem enviada:", response.status_code)
+
+    else:
+        print("Nenhum aniversariante hoje.")
+
+except Exception as e:
+    print("Erro na execução:", str(e))
