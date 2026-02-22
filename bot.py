@@ -29,7 +29,10 @@ try:
     df["mes"] = df["mes"].astype(float).astype(int)
     df["dia"] = df["dia"].astype(float).astype(int)
 
-    hoje = datetime.datetime.now()
+    from datetime import datetime
+    from zoneinfo import ZoneInfo
+
+    hoje = datetime.now(ZoneInfo("America/Sao_Paulo"))
     mes_atual = hoje.month
     dia_atual = hoje.day
 
