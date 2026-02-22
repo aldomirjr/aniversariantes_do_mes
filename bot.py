@@ -61,7 +61,7 @@ Que Deus abençoe grandemente esse novo ano! 🙏
             "chat_id": CHAT_ID,
             "text": mensagem
         })
-
+        print("URL enviada:", f"https://api.telegram.org/bot{TOKEN}/sendMessage")
         print("Mensagem enviada:", response.status_code)
 
     else:
