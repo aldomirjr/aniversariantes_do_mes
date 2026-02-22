@@ -7,7 +7,7 @@ import pandas as pd
 # CONFIGURAÇÕES
 # =========================
 
-TOKEN = os.getenv("TOK8315623446:AAG7PqkDBZkM6FSqHbUxTtt0N-_MAbp1YSYEN")
+TOKEN = os.getenv("8315623446:AAG7PqkDBZkM6FSqHbUxTtt0N-_MAbp1YSY")
 CHAT_ID = os.getenv("-1003781537166")
 
 URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRBuYPsC6XDnfjGLkWF5saaL7wbEFTdRNamIT6vg3i13F3ngEfbP0JnuvHHefvpMMGuOm99yrpG69te/pub?output=csv"
