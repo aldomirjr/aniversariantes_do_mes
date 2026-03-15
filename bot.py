@@ -9,7 +9,7 @@ import pandas as pd
 
 TOKEN = os.getenv("TOKEN")
 CHAT_ID = os.getenv("CHAT_ID")
-ULR_CSV =  os.getenv("URL_CSV")
+URL_CSV =  os.getenv("URL_CSV")
 
 URL = URL_CSV
 
