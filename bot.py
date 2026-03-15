@@ -9,8 +9,9 @@ import pandas as pd
 
 TOKEN = os.getenv("TOKEN")
 CHAT_ID = os.getenv("CHAT_ID")
+ULR__CSV =  os.getenv("URL_CSV")
 
-URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRBuYPsC6XDnfjGLkWF5saaL7wbEFTdRNamIT6vg3i13F3ngEfbP0JnuvHHefvpMMGuOm99yrpG69te/pub?output=csv"
+URL = URL_CSV
 
 # =========================
 # EXECUÇÃO
